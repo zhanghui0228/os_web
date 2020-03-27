@@ -11,6 +11,7 @@ def index(request):
 def check(request):
     info = {
         "option1": check_option.local_system(),
-        "option2": check_option.useagent()
+        "option2": check_option.useagent(),
+        "option3": check_option.local_disk()
     }
     return JsonResponse(info)
