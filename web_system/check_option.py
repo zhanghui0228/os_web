@@ -1,3 +1,9 @@
+'''
+ 1、目前支持的检查范围 (本地信息)
+
+ 输出结果说明：
+    return local_info[0]    [0] 输出为本地信息， 后面会增加多个内容，表示其它机器信息
+'''
 import os
 import psutil
 from logzero import logfile, logger
@@ -65,7 +71,7 @@ def local_disk():
     }]
     try:
         logger.info("磁盘使用情况如下:{}".format(local_info))
-        return local_info
+        return local_info[0]
     except Exception as err:
         logger.error("信息获取失败：{}".format(err))
 
