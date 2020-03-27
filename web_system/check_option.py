@@ -7,10 +7,12 @@
 import os
 import psutil
 from logzero import logfile, logger
+from . import settings
 
+log_path = os.path.join(settings.BASE_DIR, "log") 
 try:
-    if os.path.exists("log") == False:
-        os.mkdir("log")
+    if os.path.exists("log_path") == False:
+        os.mkdir("log_path")
 except Exception as err:
     print("创建日志目录失败,错误原因：{}".format(err))
 
