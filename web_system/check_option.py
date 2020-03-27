@@ -51,6 +51,25 @@ def local_system():
         logger.error("获取信息失败：{}".format(err))
         return err
 
+
+def local_disk():
+    # 查询本地磁盘使用情况
+    root_disk = psutil.disk_usage('/')
+    disk_all_count = root_disk.total    # 根磁盘总大小
+    disk_use_count = root_disk.used     # 根磁盘使用量
+    disk_lv = root_disk.percent         # 根磁盘使用率
+    local_info = [{
+        "磁盘总大小": disk_all_count,
+        "磁盘已使用": disk_use_count,
+        "磁盘使用率": disk_lv
+    }]
+    try:
+        logger.info("磁盘使用情况如下:{}".format(local_info))
+        return local_info
+    except Exception as err:
+        logger.error("信息获取失败：{}".format(err))
+
+
 # if __name__ == '__main__':
 #     local_system()
 #     useagent()
