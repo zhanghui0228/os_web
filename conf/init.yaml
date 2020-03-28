@@ -1,0 +1,13 @@
+# django需要修改的配置信息
+
+# 数据库引擎
+db_type: django.db.backends.mysql   # mysql: django.db.backends.mysql; sqlite3: django.db.backends.sqlite3
+db_host: 127.0.0.1    # mysql 填写db 地址; sqlite3 无需填写
+db_port: 3306         # mysql 填写db 端口; sqlite3 无需填写
+db_user: root         # mysql 填写db 用户；sqlite3 无需填写
+db_password: 123123   # mysql 填写db 密码; sqlite3 无需填写
+db_database: students   # mysql 填写数据库名称; sqlite3 填写 os.path.join(BASE_DIR, 'db.sqlite3')
+
+
+# 调试模式  建议：生成环境中请将值修改为False
+debug: True   # True or False

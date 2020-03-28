@@ -11,9 +11,16 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import yaml
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# conf file path
+CONF_PATH = os.path.join(BASE_DIR, "conf", "init.yaml")
+with open(CONF_PATH, 'r', encoding='utf-8') as conffile:
+    INFO = yaml.load(conffile, Loader=yaml.FullLoader)
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'x3qh=5%muku9hwi+%n79=przfxustcyjx%7jm%m@%_if5!j0g#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = INFO['debug']
 
 ALLOWED_HOSTS = ['*',]
 
@@ -78,13 +85,21 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'students',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '3306',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'students',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': INFO['db_type'],
+        'NAME': INFO['db_database'],
+        'USER': INFO['db_user'],
+        'PASSWORD': INFO['db_password'],
+        'HOST': INFO['db_host'],
+        'PORT': INFO['db_port'],
     }
 }
 
