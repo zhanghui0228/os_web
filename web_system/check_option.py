@@ -6,6 +6,7 @@
 '''
 import os
 import psutil
+import json
 from logzero import logfile, logger
 from . import settings
 
@@ -79,7 +80,6 @@ def local_disk():
 
 
 def local_service():
-    data = {}
     name_list = []
     port_list = []
     service_list = []
@@ -101,13 +101,15 @@ def local_service():
     for service in range(len(name_list)):
         service_dict = {}
         service_dict[name_list[service]] = port_list[service]
-        service_list.append(service_dict)
+        # service_dict[name_list[service]] = port_list[service]
+    service_list.append(service_dict)
 
     # data['data'] = service_list
     # jsonStr = json.dumps(data, sort_keys=True, indent=4)
     local_info = service_list
+        
     try:
         logger.info("服务端口如下：{}".format(local_info))
-        return local_info
+        return local_info[0]
     except Exception as err:
         logger.error("信息获取失败：{}".format(err))
