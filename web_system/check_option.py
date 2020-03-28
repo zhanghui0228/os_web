@@ -6,7 +6,6 @@
 '''
 import os
 import psutil
-import json
 from logzero import logfile, logger
 from . import settings
 
@@ -104,11 +103,11 @@ def local_service():
         service_dict[name_list[service]] = port_list[service]
         service_list.append(service_dict)
 
-    data['data'] = service_list
-    jsonStr = json.dumps(data, sort_keys=True, indent=4)
-    local_info = [jsonStr]
+    # data['data'] = service_list
+    # jsonStr = json.dumps(data, sort_keys=True, indent=4)
+    local_info = service_list
     try:
         logger.info("服务端口如下：{}".format(local_info))
-        return local_info[0]
+        return local_info
     except Exception as err:
         logger.error("信息获取失败：{}".format(err))
