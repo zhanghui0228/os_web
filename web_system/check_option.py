@@ -6,6 +6,7 @@
 '''
 import os
 import psutil
+import json
 from logzero import logfile, logger
 from . import settings
 
@@ -78,6 +79,36 @@ def local_disk():
         logger.error("信息获取失败：{}".format(err))
 
 
-# if __name__ == '__main__':
-#     local_system()
-#     useagent()
+def local_service():
+    data = {}
+    name_list = []
+    port_list = []
+    service_list = []
+    command_port = "netstat -tlnp | sed -n '3,$p' | awk '{print $4}' | awk -F':' '{print $NF}'"
+    command_name = "netstat -ptln|grep -i listen|awk '{print $7}'|awk -F '[/]+'  '{print $2}'"
+    line_port = os.popen(command_port).readlines()
+    line_name = os.popen(command_name).readlines()
+
+    # port
+    for port in line_port:
+        port = port.strip('\n')
+        port_list.append(port)
+
+    # server name
+    for name in line_name:
+        name = name.strip('\n')
+        name_list.append(name)
+
+    for service in range(len(name_list)):
+        service_dict = {}
+        service_dict[name_list[service]] = port_list[service]
+        service_list.append(service_dict)
+
+    data['data'] = service_list
+    jsonStr = json.dumps(data, sort_keys=True, indent=4)
+    local_info = [jsonStr]
+    try:
+        logger.info("服务端口如下：{}".format(local_info))
+        return local_info[0]
+    except Exception as err:
+        logger.error("信息获取失败：{}".format(err))
