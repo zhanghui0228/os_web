@@ -6,7 +6,6 @@
 '''
 import os
 import psutil
-import json
 from logzero import logfile, logger
 from . import settings
 
@@ -98,8 +97,8 @@ def local_service():
         name = name.strip('\n')
         name_list.append(name)
 
+    service_dict = {}
     for service in range(len(name_list)):
-        service_dict = {}
         service_dict[name_list[service]] = port_list[service]
         # service_dict[name_list[service]] = port_list[service]
     service_list.append(service_dict)
