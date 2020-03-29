@@ -1,17 +1,28 @@
 import os
+from logzero import logfile, logger
 from web_system import settings
 
 
+log_path = os.path.join(settings.BASE_DIR, "log") 
+run_log = os.path.join(log_path, "run.log")
+try:
+    if os.path.exists(log_path) == False:
+        os.mkdir(log_path)
+except Exception as err:
+    print("创建日志目录失败,错误原因：{}".format(err))
+
+logfile(run_log, maxBytes=3000000, backupCount=2, encoding="utf-8")
+
 Pid = "ps -elf|grep 'manage.py'|grep -v grep|awk '{print $4}'"
 # 启动命令
-start = "nohup python3 {0}/manage.py runserver 0.0.0.0:9000 >>{1}/log/run.log &".format(settings.BASE_DIR, settings.BASE_DIR)
+start = "nohup python3 {0}/manage.py runserver 0.0.0.0:9000 >log/jenkins_work.log&".format(settings.BASE_DIR)
 lines_pid = os.popen(Pid)
 
-print (list(lines_pid))
 # kill process id
 for i in lines_pid:
     i = i.strip('\n')
-    os.popen("kill -9 {}".format(i))
+    logger.info(os.popen("kill -9 {}".format(i)))
 
 # start project
-os.popen(start)
+local_info = os.popen(start)
+logger.info(local_info)
