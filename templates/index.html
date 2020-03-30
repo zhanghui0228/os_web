@@ -21,8 +21,8 @@
         <tr>
             <td width="500"></td>
             <td width="300" height="300xp">
-                <table border="0">
-                    <caption>系统信息</caption>
+                <table border="1">
+                    <caption>系统基础信息</caption>
                     <tr>
                         <th>name</th>
                         <th>value</th>
@@ -32,10 +32,10 @@
                     <tr>
                         <td>{{ key }}</td>
                         <td>{{ value }}</td>
-                        <!--值大于60小于90为黄色，大于90为红色，小于60为绿色--> >
+                        <!--值大于60小于90为黄色，大于90为红色，小于60为绿色-->
                         {% if value < 60 %}
                         <td bgcolor=".sucess">sucess</td>
-                        {% elif value >=60 and value <= 90 %}
+                        {% elif value >= 60 and value <= 90 %}
                         <td bgcolor=".warning">warning</td>
                         {% elif value > 90 %}
                         <td bgcolor=".error">error</td>
@@ -44,8 +44,8 @@
                     {% endfor %}
                 </table>
             </td>
-            <td width="300" height="50xp">
-                <table border="0">
+            <td width="300">
+                <table border="1">
                     <caption>端口信息</caption>
                     <tr>
                         <th>name</th>
