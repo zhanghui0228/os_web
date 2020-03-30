@@ -3,18 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>table</title>
-    <style type="text/css">
-        .sucess {
-            
-            color: green;
-        }
-        .warning {
-            color: yellow;
-        }
-        .error {
-            color: red;
-        }
-    </style>
 </head>
 <body>
     <table border="0">
@@ -34,11 +22,11 @@
                         <td>{{ value }}</td>
                         <!--值大于60小于90为黄色，大于90为红色，小于60为绿色-->
                         {% if value < 60 %}
-                        <td bgcolor=".sucess">sucess</td>
+                        <td bgcolor="green">sucess</td>
                         {% elif value >= 60 and value <= 90 %}
-                        <td bgcolor=".warning">warning</td>
+                        <td bgcolor="yellow">warning</td>
                         {% elif value > 90 %}
-                        <td bgcolor=".error">error</td>
+                        <td bgcolor="red">error</td>
                         {% endif %}
                     </tr>
                     {% endfor %}
