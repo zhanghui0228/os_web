@@ -32,9 +32,17 @@ def useagent():
         memory_lv = round(float(memory.used) / float(memory.total) * 100, 2)    # 保留两位小数
         # memory_list.append(memory_lv)
         # logger.info("当前服务器内存利用率{:.2f}%".format(memory_lv))
+
+        # 查询本地磁盘使用情况
+        root_disk = psutil.disk_usage('/')
+        disk_all_count = root_disk.total    # 根磁盘总大小
+        disk_use_count = root_disk.used     # 根磁盘使用量
+        disk_lv = root_disk.percent         # 根磁盘使用率
+
         local_info = [{
             "cpu": cpu_lv,
-            "memory": memory_lv
+            "memory": memory_lv,
+            "disk": disk_lv
         }]
         logger.info("信息获取如下：{}".format(local_info))
         return local_info[0]

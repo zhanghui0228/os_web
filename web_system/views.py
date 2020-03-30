@@ -1,10 +1,13 @@
 from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render
 from . import check_option
 
 
 # 定义首页
 def index(request):
-    return HttpResponse("this is index")
+    local_system = check_option.useagent()
+    local_port = check_option.local_service()
+    return render(request, 'index.html',{'local_system': local_system, 'local_port': local_port})
 
 
 # 定义检查项
