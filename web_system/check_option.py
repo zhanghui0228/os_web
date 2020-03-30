@@ -6,7 +6,7 @@
 '''
 import os
 import psutil
-from logzero import logfile, logger
+from logzero import logfile, logger, logging
 from . import settings
 
 log_path = os.path.join(settings.BASE_DIR, "log") 
@@ -16,6 +16,7 @@ try:
 except Exception as err:
     print("创建日志目录失败,错误原因：{}".format(err))
 
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(moduls)s-%(processName)s-%(message)s')
 logfile("log/system.log", maxBytes=3000000, backupCount=2, encoding="utf-8")
 
 def useagent():
