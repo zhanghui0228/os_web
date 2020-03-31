@@ -1,0 +1,5 @@
+# 系统url可访问地址
+
+URL:
+  - index # 首页检查信息
+  - check # 返回json格式检查结果
