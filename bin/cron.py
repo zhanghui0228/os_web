@@ -11,7 +11,7 @@ logfile("log/cron.log", maxBytes=3000000, backupCount=2, encoding="utf-8")
 # 获取python安装路径
 install_path = dict(os.environ).get('_')
 # 任务中脚本执行路径
-run_path = os.path.join(settings.BASE_DIR, 'web_system/bin/check.py')
+run_path = os.path.join(settings.BASE_DIR, 'bin/check.py')
 # 创建当前用户的计划任务
 my_user_cron = CronTab(user=True)
 # 创建任务
