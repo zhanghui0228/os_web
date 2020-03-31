@@ -1,6 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from . import check_option
+import check_option
 
 
 # 定义首页
