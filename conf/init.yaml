@@ -12,8 +12,8 @@ db_database: students   # mysql 填写数据库名称; sqlite3 填写 os.path.jo
 server_port: 9000
 
 # 钉钉机器人信息
-webhook: https://oapi.dingtalk.com/robot/send?access_token=722b36e44470a931bd76b03b51fc7773f4c518d7038cac9689390a7f518c57e4
-keywords: hui
+webhook: 
+keywords: 
 
 # 调试模式  建议：生成环境中请将值修改为False
 debug: True   # True or False
