@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from . import check_option
+from . import check_site
 
 
 
@@ -20,3 +21,9 @@ def check(request):
         "option4": check_option.local_service()
     }
     return JsonResponse(info)
+
+
+# 定义test
+def test(request):
+    info = check_site.healthy()
+    return HttpResponse(info)

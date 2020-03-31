@@ -22,5 +22,6 @@ urlpatterns = [
 
     # 定义首页
     path('index/', views.index, name='index'),
-    path('check/', views.check, name='check')
+    path('check/', views.check, name='check'),
+    path('test/', views.test, name='test'),
 ]
