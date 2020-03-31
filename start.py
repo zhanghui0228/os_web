@@ -19,8 +19,8 @@ logfile(run_log, maxBytes=3000000, backupCount=2, encoding="utf-8")
 Pid = "ps -elf|grep 'manage.py'|grep -v grep|awk '{print $4}'"
 
 # 安装模块依赖，初始化环境
-sh_path = os.path.join(settings.BASE_DIR, 'bin')
-module = "bash {}/init.sh".format()
+init_path = os.path.join(settings.BASE_DIR, 'bin')
+module = "python3 {}/init.py".format(init_path)
 logger.debug(os.popen(module))
 
 # 启动命令
