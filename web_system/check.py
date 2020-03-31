@@ -2,8 +2,8 @@
     检查脚本，供计划任务使用
 '''
 from logzero import logfile, logger, logging
-from . import check_healthy
-from . import check_option
+import check_healthy
+import check_option
 
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(moduls)s-%(processName)s-%(message)s')
