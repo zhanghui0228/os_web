@@ -18,7 +18,9 @@ from . import settings
 
 
 log_path = os.path.join(settings.BASE_DIR, "log") 
+# 获取url信息
 URL_PATH = os.path.join(settings.BASE_DIR, "conf", "url.yaml")
+# 获取项目端口信息
 PORT_PATH = os.path.join(settings.BASE_DIR, "conf", "init.yaml")
 with open(URL_PATH, 'r', encoding='utf-8') as url:
     url_list = yaml.load(url, Loader=yaml.FullLoader)   # url_list['URL']
@@ -62,6 +64,7 @@ def message_notice(info):
 # 健康检查
 def local_healthy():
     local_url = []
+    local_err_url = []
     for u in range(len(url_list['URL'])):
         try:
             # 定义url
@@ -73,8 +76,9 @@ def local_healthy():
         except Exception as err:
             info = "{}健康检查失败".format(url)
             message_notice(info)
+            local_err_url.append(info)
             logger.error("检查url失败：{}".format(err))
-    return local_url
+    return [local_url, local_err_url]
 
 
 

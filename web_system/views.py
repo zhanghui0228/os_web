@@ -3,6 +3,7 @@ from django.shortcuts import render
 from . import check_option
 
 
+
 # 定义首页
 def index(request):
     local_system = check_option.useagent()

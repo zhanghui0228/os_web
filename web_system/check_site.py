@@ -16,7 +16,7 @@ basics_healthy = check_option.useagent()
 
 
 
-def run():
+def healthy():
     local_info = [basics_healthy, url_healthy]
     try:
         # 钉钉机器人通知
@@ -24,7 +24,3 @@ def run():
         logger.debug("发送信息：{}".format(check_healthy))
     except Exception as err:
         logger.error("消息发送失败:{}".format(err))
-
-
-if __name__ == '__main__':
-    run()

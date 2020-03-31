@@ -1,4 +1,4 @@
-# 添加计划任务
+# 添加计划任务  暂时废弃
 import os
 from logzero import logfile, logger, logging
 from crontab import CronTab
