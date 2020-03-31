@@ -17,6 +17,11 @@ except Exception as err:
 logfile(run_log, maxBytes=3000000, backupCount=2, encoding="utf-8")
 
 Pid = "ps -elf|grep 'manage.py'|grep -v grep|awk '{print $4}'"
+
+# 安装模块依赖，初始化环境
+module = "bash {}/init.sh".format(settings.BASE_DIR)
+logger.debug(os.popen(module))
+
 # 启动命令
 start = "echo {0} >log/jenkins_work.log && nohup python3 {1}/manage.py runserver 0.0.0.0:9000 >>log/jenkins_work.log&".format(now_time, settings.BASE_DIR)
 lines_pid = os.popen(Pid)
