@@ -2,7 +2,7 @@
 import os
 from logzero import logfile, logger, logging
 from crontab import CronTab
-import settings
+from . import settings
 
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(moduls)s-%(processName)s-%(message)s')

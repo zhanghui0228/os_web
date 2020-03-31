@@ -7,7 +7,7 @@
 import os
 import psutil
 from logzero import logfile, logger, logging
-import settings
+from . import settings
 
 log_path = os.path.join(settings.BASE_DIR, "log") 
 try:
