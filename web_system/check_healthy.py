@@ -79,8 +79,8 @@ def local_healthy():
 
 
 
-# 定时检查url健康状态 
-def check_url():
-    while True:
-        local_healthy()
-        time.sleep(3000)
+# # 定时检查url健康状态 
+# def check_url():
+#     while True:
+#         local_healthy()
+#         time.sleep(3000)

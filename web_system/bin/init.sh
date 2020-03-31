@@ -11,3 +11,6 @@ do
         pip install $m
     fi
 done
+which python3 >>/dev/null
+if [ $? -eq 0 ]:then
+    python3 cron.py
