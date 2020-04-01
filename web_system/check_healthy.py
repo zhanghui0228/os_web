@@ -15,6 +15,7 @@ import json
 import requests
 from logzero import logfile, logger, logging
 from . import settings
+from . import message
 
 
 log_path = os.path.join(settings.BASE_DIR, "log") 
@@ -37,54 +38,25 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(moduls)s-
 logfile("log/healthy.log", maxBytes=3000000, backupCount=2, encoding="utf-8")
 
 
-# 消息通知
-def message_notice(info):
-    webhook = init_info['webhook']
-    keywords = init_info['keywords']
-    headers = {'Content-Type': 'application/json;charset=utf-8'}
-    pagrem = {
-        "msgtype": "text", 
-        "text": {
-            "content": "{0},\n{1}".format(info, keywords)
-        }, 
-        "at": {
-            "atMobiles": [
-                "156xxxx8827", 
-            ], 
-            "isAtAll": False
-        }
-    }
-    try:
-        requests.post(webhook, json.dumps(pagrem),headers=headers).content
-        logger.debug("{} 消息发送成功".format(info))
-    except Exception as err:
-        logger.error("消息发送失败：{}".format(err))
-
 
 # 健康检查
 def local_healthy():
+    s = requests.session()
+    s.keep_alive = False
+    headers = {'Connection': 'close',}
     local_url = []
     local_err_url = []
     for u in range(len(url_list['URL'])):
         try:
             # 定义url
             url = "http://127.0.0.1:{port}/{option}".format(port=init_info['server_port'], option=url_list['URL'][u])
-            connect_status = requests.get("{}".format(url), timeout=3).status_code
+            connect_status = requests.get("{}".format(url), headers=headers, timeout=3).status_code
             local_info = {url: connect_status}
             logger.info("[url:{0}; 状态:{1}]".format(url, connect_status))
             local_url.append(local_info)
         except Exception as err:
             info = "{}健康检查失败".format(url)
-            message_notice(info)
+            message.message_notice(info)
             local_err_url.append(info)
             logger.error("检查url失败：{}".format(err))
     return [local_url, local_err_url]
-
-
-
-
-# # 定时检查url健康状态 
-# def check_url():
-#     while True:
-#         local_healthy()
-#         time.sleep(3000)

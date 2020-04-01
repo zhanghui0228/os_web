@@ -4,6 +4,7 @@
 from logzero import logfile, logger, logging
 from . import check_healthy
 from . import check_option
+from . import message
 
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(moduls)s-%(processName)s-%(message)s')
@@ -20,7 +21,7 @@ def healthy():
     local_info = [basics_healthy, url_healthy]
     try:
         # 钉钉机器人通知
-        check_healthy.message_notice(local_info)
+        message.message_notice(local_info)
         logger.debug("发送信息：{}".format(check_healthy))
     except Exception as err:
         logger.error("消息发送失败:{}".format(err))
