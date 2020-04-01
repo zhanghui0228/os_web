@@ -1,4 +1,4 @@
-module = ['python-crontab', 'logzero', 'pyyaml']
+module = ['python-crontab', 'logzero', 'pyyaml', 'pymysql', 'psutil']
 
 # 项目初始化配置信息    --- conf/init.yaml
 

@@ -1,4 +1,5 @@
 '''
+    # 暂时废弃
     对系统的一个健康检查，用于每天固定巡检
         巡检项：
             系统基本信息
@@ -10,7 +11,6 @@
 '''
 import os
 import yaml
-import time
 import json
 import requests
 from logzero import logfile, logger, logging
@@ -40,23 +40,23 @@ logfile("log/healthy.log", maxBytes=3000000, backupCount=2, encoding="utf-8")
 
 
 # 健康检查
-def local_healthy():
-    s = requests.session()
-    s.keep_alive = False
-    headers = {'Connection': 'close',}
-    local_url = []
-    local_err_url = []
-    for u in range(len(url_list['URL'])):
-        try:
-            # 定义url
-            url = "http://127.0.0.1:{port}/{option}".format(port=init_info['server_port'], option=url_list['URL'][u])
-            connect_status = requests.get("{}".format(url), headers=headers, timeout=3).status_code
-            local_info = {url: connect_status}
-            logger.info("[url:{0}; 状态:{1}]".format(url, connect_status))
-            local_url.append(local_info)
-        except Exception as err:
-            info = "{}健康检查失败".format(url)
-            message.message_notice(info)
-            local_err_url.append(info)
-            logger.error("检查url失败：{}".format(err))
-    return [local_url, local_err_url]
+# def local_healthy():
+#     s = requests.session()
+#     s.keep_alive = False
+#     headers = {'Connection': 'close',}
+#     local_url = []
+#     local_err_url = []
+#     for u in range(len(url_list['URL'])):
+#         try:
+#             # 定义url
+#             url = "http://127.0.0.1:{port}/{option}".format(port=init_info['server_port'], option=url_list['URL'][u])
+#             connect_status = requests.get("{}".format(url), headers=headers, timeout=3).status_code
+#             local_info = {url: connect_status}
+#             logger.info("[url:{0}; 状态:{1}]".format(url, connect_status))
+#             local_url.append(local_info)
+#         except Exception as err:
+#             info = "{}健康检查失败".format(url)
+#             message.message_notice(info)
+#             local_err_url.append(info)
+#             logger.error("检查url失败：{}".format(err))
+#     return [local_url, local_err_url]
