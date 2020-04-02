@@ -1,8 +1,0 @@
-[E 200401 15:55:07 url_healthy:43] {"检查信息：http://127.0.0.1:9000/index, 错误原因:HTTPConnectionPool(host='127.0.0.1', port=9000): Max retries exceeded with url: /index (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001B49D50BB48>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))"}
-[E 200401 15:55:09 url_healthy:43] {"检查信息：http://127.0.0.1:9000/check, 错误原因:HTTPConnectionPool(host='127.0.0.1', port=9000): Max retries exceeded with url: /check (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001B49DAF8F48>: Failed to establish a new connection: [WinError 10061] 由于目标计算机积极拒绝，无法连接。'))"}
-[D 200401 15:58:45 url_healthy:40] 检查信息：[{'http://39.106.207.236:9000/index': 200}]
-[D 200401 15:58:45 url_healthy:40] 检查信息：[{'http://39.106.207.236:9000/index': 200}, {'http://39.106.207.236:9000/check': 200}]
-[D 200401 15:59:22 url_healthy:40] 检查信息：{'http://39.106.207.236:9000/index': 200}
-[D 200401 15:59:22 url_healthy:40] 检查信息：{'http://39.106.207.236:9000/check': 200}
-[D 200401 18:43:35 url_healthy:40] 检查信息：{'http://39.106.207.236:9000/index': 200}
-[D 200401 18:43:35 url_healthy:40] 检查信息：{'http://39.106.207.236:9000/check': 200}
