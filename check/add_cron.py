@@ -19,7 +19,7 @@ install_path = dict(os.environ).get('_')
 # 创建当前用户的计划任务
 my_user_cron = CronTab(user=True)
 # 创建任务
-job_1 = my_user_cron.new(command='cd {0} && {1} {2}/{3}.format(comm_path, install_path, check_path, run_file))
+job_1 = my_user_cron.new(command='cd {0} && {1} {2}/{3}'.format(comm_path, install_path, check_path, run_file))
 # 设置任务执行周期，每天18执行一次
 job_1.setall('* 18 * * *')
 # 启动任务
