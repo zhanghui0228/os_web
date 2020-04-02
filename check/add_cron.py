@@ -30,6 +30,6 @@ job_1.enable()
 # 写入配置文件
 try:
     my_user_cron.write()
-    logger.info("任务创建成功！{}".format(cmd))
+    logger.info("添加任务成功：[{}]".format(cmd))
 except Exception as err:
-    logger.error("任务创建失败！")
+    logger.error("添加任务失败：[{}]".format(cmd))
