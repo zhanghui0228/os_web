@@ -9,7 +9,7 @@ logfile("log/cron.log", maxBytes=3000000, backupCount=2, encoding="utf-8")
 # 计划任务执行脚本所在路径
 check_path = os.path.dirname(__file__)
 # 命令执行路径
-comm_path = check_path.replace('check', '')
+comm_path = os.getcwd()
 # 执行脚本名称
 run_file = 'url_healthy.py'
 
