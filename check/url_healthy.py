@@ -5,6 +5,7 @@ import os
 import yaml
 import requests
 from logzero import logfile, logger, logging
+import message
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(moduls)s-%(processName)s-%(message)s')
 logfile("log/url.log", maxBytes=3000000, backupCount=2, encoding="utf-8")
@@ -49,5 +50,16 @@ def healthy_url():
     return local_message
 
 
+
+
+# 调用钉钉机器人接口
+def main(info):
+    try:
+        logger.info(info)
+        message.message_notice(info)
+    except Exception as err:
+        logger.error("失败：{}".format(err))
+
+
 if __name__ == '__main__':
-    healthy_url()
+    main(healthy_url())
