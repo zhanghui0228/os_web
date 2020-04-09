@@ -8,6 +8,8 @@ import os
 import psutil
 from logzero import logfile, logger, logging
 from . import settings
+from collect.models import Web as web
+
 
 log_path = os.path.join(settings.BASE_DIR, "log") 
 try:
@@ -45,6 +47,9 @@ def useagent():
             "memory": memory_lv,
             "disk": disk_lv
         }]
+        web_info = web.objects.create(name="cpu", value=local_info[0].get('cpu'))
+        web_info = web.objects.create(name="memory", value=local_info[0].get('memory'))
+        web_info = web.objects.create(name="disk", value=local_info[0].get('disk'))
         logger.info("信息获取如下：{}".format(local_info))
         return local_info[0]
     except Exception as err:
