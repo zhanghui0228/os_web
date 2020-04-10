@@ -28,7 +28,7 @@ port = info_list['server_port']
 Pid = "ps -elf|grep 'manage.py'|grep -v grep|awk '{print $4}'"
 
 # 启动命令
-start = "echo {0} >log/jenkins_work.log && nohup python3 {1}/manage.py runserver 0.0.0.0:{2}} >>log/jenkins_work.log&".format(now_time, settings.BASE_DIR, port)
+start = "echo {0} >log/jenkins_work.log && nohup python3 {1}/manage.py runserver 0.0.0.0:{2} >>log/jenkins_work.log&".format(now_time, settings.BASE_DIR, port)
 lines_pid = os.popen(Pid)
 
 # kill process id
