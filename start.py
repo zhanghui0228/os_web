@@ -25,7 +25,7 @@ with open(init_file, 'r', encoding='utf-8') as file:
 # start port
 port = info_list['server_port']
 
-Pid = "ps -elf|grep 'manage.py'|grep -v grep|awk '{print $4}'"
+Pid = "ps -elf|grep 'manage.py'|grep -v grep|grep {port}|awk '{{print $4}}'".format(port=port)
 
 # 启动命令
 start = "echo {0} >log/jenkins_work.log && nohup python3 {1}/manage.py runserver 0.0.0.0:{2} >>log/jenkins_work.log&".format(now_time, settings.BASE_DIR, port)
