@@ -1,4 +1,4 @@
-module = ['python-crontab', 'logzero', 'pyyaml', 'pymysql', 'psutil']
+module = ['python-crontab', 'logzero', 'pyyaml', 'pymysql', 'psutil'， ‘requests’]
 
 # 项目初始化配置信息    --- conf/init.yaml
 # 项目url配置路由信息   --- conf/url.yaml

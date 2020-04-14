@@ -47,9 +47,24 @@ def useagent():
             "memory": memory_lv,
             "disk": disk_lv
         }]
-        web_info = web.objects.create(name="cpu", value=local_info[0].get('cpu'))
-        web_info = web.objects.create(name="memory", value=local_info[0].get('memory'))
-        web_info = web.objects.create(name="disk", value=local_info[0].get('disk'))
+        try:
+            get_cpu = web.objects.get(name='cpu')
+            get_cpu.value = local_info[0].get('cpu')
+            get_cpu.save()
+
+            get_memory = web.objects.get(name='memory')
+            get_memory.value = local_info[0].get('memory')
+            get_memory.save()
+
+            get_disk = web.objects.get(name='disk')
+            get_disk.value = local_info[0].get('disk')
+            get_disk.save()
+        except:
+            get_cpu = web.objects.create(name="cpu", value=local_info[0].get('cpu'))
+            get_memory = web.objects.create(name="memory", value=local_info[0].get('memory'))
+            get_disk = web.objects.create(name="disk", value=local_info[0].get('disk'))
+
+        logger.debug("数据更新成功, cpu:{};memory:{};disk:{}".format(get_cpu.value, get_memory.value, get_disk.value))
         logger.info("信息获取如下：{}".format(local_info))
         return local_info[0]
     except Exception as err:
