@@ -9,7 +9,7 @@ db_password: 123123   # mysql 填写db 密码; sqlite3 无需填写
 db_database: students   # mysql 填写数据库名称; sqlite3 填写 os.path.join(BASE_DIR, 'db.sqlite3')
 
 # 运行端口
-server_port: 9000
+server_port: 9001
 
 # 钉钉机器人信息
 webhook: 
