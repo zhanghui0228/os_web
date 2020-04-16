@@ -12,3 +12,14 @@ class Web(models.Model):
 
     class Meta:
         db_table = 'os_web'
+
+
+class Port_info(models.Model):
+    '''端口信息'''
+    name = models.CharField('服务名称', max_length=256)
+    port = models.IntegerField('端口')
+    create_time = models.DateTimeField('创建时间', auto_now_add=True)
+    update_time = models.DateTimeField('更新时间', auto_now=True)
+
+    class Meta:
+        db_table = 'port_info'

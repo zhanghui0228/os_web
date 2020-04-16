@@ -9,6 +9,7 @@ import psutil
 from logzero import logfile, logger, logging
 from . import settings
 from collect.models import Web as web
+from collect.models import Port_info
 
 
 log_path = os.path.join(settings.BASE_DIR, "log") 
@@ -47,24 +48,33 @@ def useagent():
             "memory": memory_lv,
             "disk": disk_lv
         }]
-        try:
-            get_cpu = web.objects.get(name='cpu')
-            get_cpu.value = local_info[0].get('cpu')
-            get_cpu.save()
+        info_list = ['cpu', 'memory', 'disk']
+        for i in info_list:
+            try:
+                get_into = web.objects.get(name=i)
+                get_into.value = local_info[0].get(i)
+                get_into.save()
+                logger.debug("数据更新成功, {0}: {1}".format(get_info.name, get_info.value))
+            except:
+                get_into = web.objects.create(name=i, value=local_info[0].get(i))
+                logger.debug("数据更新成功, {0}".format(get_info.pk))
+        # try:
+        #     get_cpu = web.objects.get(name='cpu')
+        #     get_cpu.value = local_info[0].get('cpu')
+        #     get_cpu.save()
 
-            get_memory = web.objects.get(name='memory')
-            get_memory.value = local_info[0].get('memory')
-            get_memory.save()
+        #     get_memory = web.objects.get(name='memory')
+        #     get_memory.value = local_info[0].get('memory')
+        #     get_memory.save()
 
-            get_disk = web.objects.get(name='disk')
-            get_disk.value = local_info[0].get('disk')
-            get_disk.save()
-        except:
-            get_cpu = web.objects.create(name="cpu", value=local_info[0].get('cpu'))
-            get_memory = web.objects.create(name="memory", value=local_info[0].get('memory'))
-            get_disk = web.objects.create(name="disk", value=local_info[0].get('disk'))
+        #     get_disk = web.objects.get(name='disk')
+        #     get_disk.value = local_info[0].get('disk')
+        #     get_disk.save()
+        # except:
+        #     get_cpu = web.objects.create(name="cpu", value=local_info[0].get('cpu'))
+        #     get_memory = web.objects.create(name="memory", value=local_info[0].get('memory'))
+        #     get_disk = web.objects.create(name="disk", value=local_info[0].get('disk'))
 
-        logger.debug("数据更新成功, cpu:{};memory:{};disk:{}".format(get_cpu.value, get_memory.value, get_disk.value))
         logger.info("信息获取如下：{}".format(local_info))
         return local_info[0]
     except Exception as err:
@@ -130,6 +140,16 @@ def local_service():
     for service in range(len(name_list)):
         service_dict[name_list[service]] = port_list[service]
         # service_dict[name_list[service]] = port_list[service]
+        try:
+            port_info = Port_info.objects.get(name=name_list[service])
+            port_info.port = port_list[service]
+            port_info.save()
+            logger.debug("记录更新成功：{0}: {1}".format(port_info.name, port_info.port))
+        except:
+            port_info = Port_info.objects.create(name=name_list[service], port=port_list[service])
+            logger.debug("记录创建成功：{0}".format(port_info.pk))
+        # finally:
+        #     logger.debug("记录创建成功：{0}: {1}".format(port_info.name, port_info.port))
     service_list.append(service_dict)
 
     # data['data'] = service_list

@@ -28,6 +28,8 @@ port = info_list['server_port']
 Pid = "ps -elf|grep 'manage.py'|grep -v grep|grep {port}|awk '{{print $4}}'".format(port=port)
 
 # 启动命令
+init_be_produced = "python3 {0}/manage.py makemigrations".format(settings.BASE_DIR)
+init_sync = "python3 {0}/manage.py migrate".format(settings.BASE_DIR)
 start = "echo {0} >log/jenkins_work.log && nohup python3 {1}/manage.py runserver 0.0.0.0:{2} >>log/jenkins_work.log&".format(now_time, settings.BASE_DIR, port)
 lines_pid = os.popen(Pid)
 
@@ -36,6 +38,10 @@ for i in lines_pid:
     i = i.strip('\n')
     logger.info(os.popen("kill -9 {}".format(i)))
 
+# init db
+logger.debug(os.popen(init_be_produced).readlines())
+logger.debug(os.popen(init_sync).readlines())
+
 # start project
 local_info = os.popen(start)
-logger.info(local_info)
+logger.info(local_info.readlines())
